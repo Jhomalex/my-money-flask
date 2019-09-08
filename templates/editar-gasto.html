@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+    <div class="columns">
+        <div class="column">
+            <form action="/update/{{gasto.id}}" method="POST">
+                <div style="margin:20px" class="is-half">
+                    <span class="title">Gestionar gasto</span>
+                </div>
+                <div class="field">
+                    <label class="label">Tipo de gasto:</label>
+                    <div class="control">
+                        <div class="select">
+                            <select name="tipo">
+                                <option disabled selected>Selecciona el tipo de gasto</option>
+                                <option>Comida</option>
+                                <option>Pasajes</option>
+                                <option>Ropa</option>
+                                <option>Estudios</option>
+                                <option>Entretenimiento</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Monto:</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input is-success" type="number" placeholder="Coloca el monto gastado" name="monto"
+                            value="{{ gasto.monto }}">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Descripción</label>
+                    <div class="control">
+                        <textarea class="textarea" placeholder="Describe el gasto realizado"
+                            name="descripcion">{{ gasto.descripcion }}</textarea>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Fecha:</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input is-success" type="date" value="{{ gasto.fecha }}"
+                            placeholder="Coloca la fecha en que se realizó el gasto" name="fecha">
+                    </div>
+                </div>
+
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-primary">Guardar</button>
+                    </div>
+                </div>
+            </form>
+            {% with mensajes = get_flashed_messages() %}
+            {% if mensajes %}
+            {% for mensaje in mensajes %}
+            <article class="message is-success">
+                <div class="message-body">
+                    {{ mensaje }}
+                </div>
+            </article>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+</div>
+{% endblock %}
